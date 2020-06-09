@@ -14,12 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.wmxl.dao.LogDao;
 import org.wmxl.model.Log;
 import org.wmxl.model.VideoLog;
+import org.wmxl.service.LogService;
 
 /**
  * Servlet implementation class LoginServlet
  */
 @WebServlet("/upload")
 public class UploadServlet extends HttpServlet {	
+	
+	LogService logService = new LogService();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -37,12 +40,11 @@ public class UploadServlet extends HttpServlet {
 		type = request.getParameter("type");
 		logType = request.getParameter("logType");
 		
-		LogDao dao = new LogDao();
 		boolean res;
 		if(logType == "TextLog"){
-			res = dao.upload(name, description, data);		
+			res = logService.upload(name, description, data);		
 		}else{
-			res = dao.upload(name, description, data, size, type);	
+			res = logService.upload(name, description, data, size, type);	
 		}
 
 		if(res){

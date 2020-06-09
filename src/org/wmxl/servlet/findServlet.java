@@ -9,16 +9,17 @@ import javax.servlet.http.HttpSession;
 
 import org.wmxl.dao.LogDao;
 import org.wmxl.model.Log;
+import org.wmxl.service.LogService;
 
 import java.io.IOException;
 import java.util.List;
 
 public class findServlet extends HttpServlet {
-    LogDao dao = new LogDao();
+	LogService logService = new LogService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Log> logs = dao.getLogList();
+        List<Log> logs = logService.getLogList();
         HttpSession session = req.getSession();
         session.setAttribute("logs",logs);
         req.getRequestDispatcher("list.jsp").forward(req,resp);

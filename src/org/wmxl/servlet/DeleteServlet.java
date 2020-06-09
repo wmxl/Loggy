@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import org.wmxl.dao.LogDao;
+import org.wmxl.service.LogService;
 
 public class DeleteServlet extends HttpServlet {
 
@@ -14,8 +15,8 @@ public class DeleteServlet extends HttpServlet {
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
         String id = req.getParameter("id");
-        LogDao dao = new LogDao();
-        dao.delete(id);
+        LogService logService = new LogService();
+        logService.delete(id);
         resp.sendRedirect("find");	
 //        req.getRequestDispatcher("/find").forward(req, resp);
     }

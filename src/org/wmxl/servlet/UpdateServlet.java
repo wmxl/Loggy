@@ -8,9 +8,10 @@ import javax.servlet.http.*;
 
 import org.wmxl.dao.LogDao;
 import org.wmxl.model.Log;
+import org.wmxl.service.LogService;
 
 public class UpdateServlet extends HttpServlet {
-	LogDao dao = new LogDao();
+	LogService logService = new LogService();
 	
 	@Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,9 +21,8 @@ public class UpdateServlet extends HttpServlet {
 		String name = req.getParameter("name");
         String description = req.getParameter("description");
         String data = req.getParameter("data");
-        System.out.println(name +" " + description);
-        LogDao dao = new LogDao();
-        dao.update(id, name, description, data);
+
+        logService.update(id, name, description, data);
         resp.sendRedirect("find");	
     }
 	

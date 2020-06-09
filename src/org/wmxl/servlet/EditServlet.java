@@ -8,9 +8,10 @@ import javax.servlet.http.*;
 
 import org.wmxl.dao.LogDao;
 import org.wmxl.model.Log;
+import org.wmxl.service.LogService;
 
 public class EditServlet extends HttpServlet {
-	LogDao dao = new LogDao();
+	LogService logService = new LogService();
 	
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,7 +22,7 @@ public class EditServlet extends HttpServlet {
 		
 		System.out.println(id);
 
-		Log log = dao.getLog(id);
+		Log log = logService.getLog(id);
         HttpSession session = req.getSession();
         session.setAttribute("log",log);
         System.out.println(log);
